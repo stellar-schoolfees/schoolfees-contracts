@@ -24,6 +24,7 @@ What this makes easy, what it makes hard, and what would change our mind.
 
 ## Recorded so far
 
-None yet. The first expected entry is the evaluation of OpenZeppelin's Stellar
-crates before any token, transfer or access-control logic is hand-written (see
-`AGENTS.md`).
+- **0001 — Token transfers and OpenZeppelin dependencies** (*accepted*,
+  2026-09-30): no OpenZeppelin dependency in v0; token movement via the
+  soroban-sdk `TokenClient`. Approved with
+  [`docs/design/interface-v0.md`](../design/interface-v0.md).
