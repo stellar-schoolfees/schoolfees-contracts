@@ -29,5 +29,10 @@ Exact commands.
 
 ## Drafted so far
 
-None yet. The items currently deferred live in [ROADMAP.md](../../ROADMAP.md);
-they become drafts once they are sliced into contributor-sized pieces.
+- [01 — Enforce installment schedules](01-enforced-installment-schedules.md)
+- [02 — Late-fee policy with a hard cap](02-late-fee-policy.md)
+- [03 — Per-payer limits for multi-payer fees](03-per-payer-limits.md)
+- [04 — Sibling/bundle discounts](04-sibling-discounts.md)
+- [05 — Paginated school listing](05-paginated-school-listing.md)
+- [06 — Property-based paid-total invariants](06-property-based-invariants.md)
+- [07 — A public TTL-extend entrypoint](07-extend-ttl-entrypoint.md)

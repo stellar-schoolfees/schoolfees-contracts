@@ -5,12 +5,11 @@ obligation against an opaque reference, and a payer settles it on testnet with a
 transaction anyone can verify. No student names, phone numbers or IDs ever go
 on-chain — only opaque references or hashes.
 
-> **Status: skeleton (testnet only, not deployed).**
-> This repo currently contains the contract's structure and its initialization
-> surface: `initialize` and `admin`, two error codes, one event, and the CI that
-> keeps error codes honest. The fee lifecycle itself lands with the v0 design
-> (see [ROADMAP.md](ROADMAP.md)). Nothing here has been deployed, audited, or
-> used by a real payer.
+> **Status: v0 fee lifecycle implemented (testnet only, not deployed).**
+> The contract records fee obligations against opaque references, takes
+> installments, closes records, and refunds within recorded limits — see the
+> table below. Nothing here has been deployed, audited, or used by a real payer
+> yet.
 
 Part of the schoolfees project, which is three repositories:
 `schoolfees-contracts` (this one), `schoolfees-app`, `schoolfees-docs`.
@@ -21,10 +20,18 @@ Part of the schoolfees project, which is three repositories:
 |---|---|
 | `initialize(admin)` | One-time setup. Records the administrator, requires that administrator's signature. Fails with `AlreadyInitialized` if run twice. |
 | `admin()` | Returns the recorded administrator. Fails with `NotInitialized` before setup. |
+| `create_fee(school, token, reference, total, due_at)` | Records a fee against an opaque 32-byte reference. Requires the school's signature. Rejects a non-positive total, a due date that is not in the future, and a reference the school already used. Returns the fee id. |
+| `pay(fee_id, payer, amount)` | Pays part or all of a fee, moving tokens straight from the payer to the school. Rejects overpayment, zero or negative amounts, and payment on a closed fee. |
+| `close_fee(fee_id)` | Closes a fee that has nothing owed or nothing paid. Requires the school's signature. |
+| `refund(fee_id, payer, amount)` | Refunds a payer from the school's own balance, capped at what that payer still has paid. Requires the school's signature. |
+| `get_fee(fee_id)` | Returns the fee record: school, token, reference, total, due date, paid and refunded totals, closed flag. |
+| `status(fee_id)` | Returns `Open`, `Paid`, `Overdue` or `Closed`, derived from the record and the ledger time. |
 
-Both calls keep the contract's instance storage alive with a TTL bump. Events and
-error codes are documented in [docs/events.md](docs/events.md) and
-[ERRORS.md](ERRORS.md).
+Every lifecycle call keeps the records it touches alive with a deadline-based TTL
+bump: the fee's due date plus a 30-day settlement margin, with a 7-day floor.
+The contract never takes custody — payments and refunds move tokens directly
+between the payer and the school. Events and error codes are documented in
+[docs/events.md](docs/events.md) and [ERRORS.md](ERRORS.md).
 
 ## Quickstart
 
@@ -45,18 +52,19 @@ Deployment is done by a human, never by an agent:
 STELLAR_ACCOUNT=dev ./scripts/deploy-testnet.sh   # prints the contract id
 ```
 
-Two gates must be cleared first: the v0 fee lifecycle must exist, and a real
-school or tutorial centre must have agreed to try the flow (see
-[ROADMAP.md](ROADMAP.md)).
+One gate remains: a real school or tutorial centre must have agreed to try the
+flow before anything is deployed (see [ROADMAP.md](ROADMAP.md)).
 
 ## Layout
 
 ```text
 ├── src/
 │   ├── lib.rs          # #[contract] and #[contractimpl] only; thin
-│   ├── types.rs        # #[contracterror] enum, #[contractevent] types
+│   ├── fee.rs          # fee lifecycle logic
+│   ├── types.rs        # #[contracterror] enum, stored types, events
 │   ├── storage.rs      # storage keys, TTL constants, extend_ttl helpers
 │   ├── error_paths.rs  # one test per error variant
+│   ├── test_helpers.rs # shared test setup
 │   └── test.rs         # happy-path and integration tests
 ├── scripts/
 │   ├── check-errors.mjs       # ERRORS.md <-> enum Error sync check (no deps)
@@ -64,6 +72,7 @@ school or tutorial centre must have agreed to try the flow (see
 │   └── deploy-testnet.sh      # written, run by the human only
 ├── docs/
 │   ├── events.md       # event layouts
+│   ├── design/         # approved interface drafts
 │   ├── decisions/      # design decisions (see the README there)
 │   └── issue-drafts/   # drafts for contributors (never created on GitHub for you)
 ├── ERRORS.md           # error table, checked against the code in CI
@@ -85,10 +94,16 @@ school or tutorial centre must have agreed to try the flow (see
 
 ## Honest limitations
 
-- Testnet only. Not deployed anywhere.
-- No fee record exists yet: the contract cannot take a payment, record a due
-  date, or prove anything to a school.
-- No external review. Do not route real money through this.
+- Testnet only. Not deployed anywhere, and no real payer has used it.
+- No external review or audit. Do not route real money through this.
+- No upgrade path and no pause: a deployed instance keeps exactly the behaviour
+  described here.
+- Tokens sent directly to the contract address cannot be recovered — there is no
+  sweep function, because the contract never intends to hold funds.
+- Fee records are public: addresses, amounts and due dates are readable by
+  anyone. References are opaque and must never contain personal data.
+- No reminders, receipts export, or translation yet; those belong to the app and
+  docs repos, which do not exist yet.
 - The docs repo holds the full `limitations.md` once it exists; this section is
   the short version.
 
