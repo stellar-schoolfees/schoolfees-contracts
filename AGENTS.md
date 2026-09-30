@@ -117,6 +117,7 @@ stated reason requires dual-targeting — ask first), or `stellar contract test`
 - Include `rust-toolchain.toml`, `.gitignore` (`target/`, `node_modules/`, `.env`, `.stellar/`,
   `*.key`), README, CONTRIBUTING.md, ROADMAP.md, and CI.
 - Small commits with clear messages. Do not rewrite history.
+- Never add a "Generated with Codebuff" trailer or any co-author trailer to commit messages.
 
 ## Safety rules
 
