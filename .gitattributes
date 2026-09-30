@@ -1,0 +1,3 @@
+# Keep line endings consistent everywhere. Shell scripts and CI steps are run on
+# Linux, and CRLF breaks `bash` there (and in Git Bash on Windows).
+* text=auto eol=lf
