@@ -61,8 +61,9 @@ source on this machine):
 ## Consequences
 
 - Easy: minimal dependency surface and no resolution conflict with the SDK;
-  the whole money path is one audited cross-contract `transfer` on each side
-  plus per-call auth, all covered by our own tests.
+  the whole money path is one cross-contract `transfer` on each side plus
+  per-call `require_auth`, all covered by our own tests. No third-party
+  guardrails, and no third-party audit claim either.
 - Hard / accepted: no OpenZeppelin guardrails to lean on; if the project later
   grows an owner, roles, upgrades or its own token, this decision must be
   revisited before that code is hand-written.
