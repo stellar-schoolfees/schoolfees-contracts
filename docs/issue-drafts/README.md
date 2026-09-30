@@ -36,3 +36,4 @@ Exact commands.
 - [05 — Paginated school listing](05-paginated-school-listing.md)
 - [06 — Property-based paid-total invariants](06-property-based-invariants.md)
 - [07 — A public TTL-extend entrypoint](07-extend-ttl-entrypoint.md)
+- [08 — Add a coverage gate for the contract tests](08-coverage-gate.md)

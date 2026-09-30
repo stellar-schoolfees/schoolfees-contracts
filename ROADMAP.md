@@ -22,11 +22,16 @@ Approved design: [docs/design/interface-v0.md](docs/design/interface-v0.md).
 - [x] Tests for the happy path, installments, refunds, closing, timing boundaries, TTL and unauthorized callers.
 - [x] The dependency decision (no OpenZeppelin crates in v0) recorded in [docs/decisions/0001-openzeppelin-and-token-dependencies.md](docs/decisions/0001-openzeppelin-and-token-dependencies.md).
 
+## Done (companion repos)
+
+- [x] `schoolfees-docs`: architecture, limitations, threat model, pilot playbook, link checker and docs CI.
+- [x] `schoolfees-app`: wallet flow, TESTNET banner, error mapping from `ERRORS.md`, web CI.
+
 ## Next — publish and deploy
 
-- [ ] Push the v0 fee lifecycle and get CI green on GitHub.
-- [ ] First testnet deployment via `scripts/deploy-testnet.sh` — run by the human, and only after the pilot gate below is cleared.
-- [ ] Explorer links and the deployed contract id recorded in the docs repo. Nothing invented: only real hashes and addresses.
+- [x] Push the v0 fee lifecycle and get CI green on GitHub.
+- [ ] **Blocked on the pilot gate:** the first testnet deployment via `scripts/deploy-testnet.sh` — run by the human, and only after the pilot gate below is cleared. This is a maintainer step, not contributor work, so it deliberately has no issue draft.
+- [ ] **Blocked on that deployment:** record the real contract id and explorer links in the docs repo. Only real hashes and addresses; nothing invented.
 
 ## Pilot gate
 
@@ -52,11 +57,19 @@ The v0 design deliberately leaves these out. Each has a draft issue in
 - [ ] Paginated school listing — [draft](docs/issue-drafts/05-paginated-school-listing.md).
 - [ ] Property-based paid-total invariants — [draft](docs/issue-drafts/06-property-based-invariants.md).
 - [ ] A public TTL-extend entrypoint — [draft](docs/issue-drafts/07-extend-ttl-entrypoint.md).
-- [ ] The `schoolfees-docs` repo: architecture, limitations, threat model, pilot playbook.
-- [ ] The `schoolfees-app` repo: wallet flow, TESTNET banner, error mapping from `ERRORS.md`.
-- [ ] A coverage gate once the test suite is established (no number is set yet on purpose).
+- [ ] A coverage gate once the test suite is established (no number is set yet on purpose) — [draft](docs/issue-drafts/08-coverage-gate.md).
 
 ## Explicitly out of scope
 
 Mainnet deployment, investor or fundraising material, a TypeScript SDK, keeper or
 indexer services, and any feature that the v0 design does not ask for.
+
+Three of the limitations in the docs repo are deliberate boundaries rather than
+pending work, and no draft tracks them:
+
+- **Editing or cancelling a fee** — a fee is immutable except for payments,
+  refunds and the one-way `closed` flag (interface §10 defaults 4–5).
+- **Rate limiting or blocklisting fee creation** — there is no registry and no
+  identity layer in v0, and any address may create a fee (§10 default 6).
+- **Upgrade or pause machinery** — the recorded admin has no power over fees,
+  and there is no upgrade path (§10 default 11).
