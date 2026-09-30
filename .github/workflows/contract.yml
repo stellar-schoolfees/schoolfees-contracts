@@ -18,6 +18,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32v1-none
+          components: rustfmt
 
       - uses: Swatinem/rust-cache@v2
 
@@ -26,6 +27,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Check formatting
+        run: cargo fmt --all --check
 
       - name: Run contract unit tests
         run: cargo test
