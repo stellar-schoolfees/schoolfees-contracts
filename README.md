@@ -87,10 +87,12 @@ flow before anything is deployed (see [ROADMAP.md](ROADMAP.md)).
   `stable-x86_64-pc-windows-gnu` with MinGW-w64 `gcc`/`ld`. `rust-toolchain.toml`
   intentionally pins only the target, not the channel; see the comment in that
   file.
-- The Stellar CLI's latest stable release is **v28.1.0** per
-  developers.stellar.org. Anything version-specific in this repo should be
-  checked against those docs, not against another project's lockfile.
-- CI installs the CLI with `stellar/stellar-cli@v28.1.0`.
+- The Stellar CLI's current stable release is **v28.1.0** per
+  developers.stellar.org, and CI pins it with `stellar/stellar-cli@v28.1.0` —
+  that is the version this repo's build is verified against. The maintainer's
+  machine still has 27.1.0 installed, so upgrade before trusting a local
+  `stellar contract build`. Anything version-specific should be checked against
+  the Stellar docs, not against another project's lockfile.
 
 ## Honest limitations
 
@@ -102,10 +104,14 @@ flow before anything is deployed (see [ROADMAP.md](ROADMAP.md)).
   sweep function, because the contract never intends to hold funds.
 - Fee records are public: addresses, amounts and due dates are readable by
   anyone. References are opaque and must never contain personal data.
-- No reminders, receipts export, or translation yet; those belong to the app and
-  docs repos, which do not exist yet.
-- The docs repo holds the full `limitations.md` once it exists; this section is
-  the short version.
+- No reminders, translations or receipt export yet; those belong to the app
+  repo, [`schoolfees-app`](https://github.com/stellar-schoolfees/schoolfees-app),
+  which is implemented but has never run against a deployed contract or a real
+  wallet.
+- The docs repo,
+  [`schoolfees-docs`](https://github.com/stellar-schoolfees/schoolfees-docs),
+  holds the full `limitations.md`;
+  the section above is the short version.
 
 ## License
 

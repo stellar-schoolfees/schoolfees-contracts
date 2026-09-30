@@ -26,10 +26,12 @@ version pins in other people's repos, including reference projects, without chec
   `stable-x86_64-pc-windows-gnu` and the linker is MinGW-w64 `gcc`/`ld` from WinLibs, under
   `%LOCALAPPDATA%\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_*\mingw64\bin`.
   `rust-toolchain.toml` deliberately does **not** pin a channel (see the comment in that file).
-- Stellar CLI: latest stable is **v28.1.0** per the docs; this machine has **27.1.0** installed at
-  `~/.stellar-bin/stellar.exe` — treat version-specific CLI behaviour as `TODO(verify)`.
-- SDK: `soroban-sdk = "28"` pinned in `Cargo.toml`.
-- CI installs the CLI with `uses: stellar/stellar-cli@v28.1.0`.
+- Stellar CLI: **v28.1.0**, the current stable release per developers.stellar.org. CI pins it
+  with `uses: stellar/stellar-cli@v28.1.0`, so that is the version this project's build is
+  verified against. The maintainer's machine still has **27.1.0** installed at
+  `~/.stellar-bin/stellar.exe`; upgrade it before trusting a local `stellar contract build`.
+- SDK: `soroban-sdk = "28"` pinned in `Cargo.toml` (28.0.0 resolved in the committed
+  `Cargo.lock`).
 
 Commands (run from the repository root):
 
