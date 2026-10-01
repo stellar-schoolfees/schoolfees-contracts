@@ -118,7 +118,14 @@ stated reason requires dual-targeting — ask first), or `stellar contract test`
 - No `unwrap()` or `expect()` outside tests unless you explain why it cannot fail.
 - Include `rust-toolchain.toml`, `.gitignore` (`target/`, `node_modules/`, `.env`, `.stellar/`,
   `*.key`), README, CONTRIBUTING.md, ROADMAP.md, and CI.
-- Small commits with clear messages. Do not rewrite history.
+
+## Commit rules
+
+- One logical change per commit. Never bundle unrelated changes.
+- Never create empty or filler commits.
+- Every commit must pass this repository's checks (the commands listed under Toolchain above).
+- Subject line: 100 characters or fewer, in the imperative mood.
+- Do not rewrite history.
 - Never add a "Generated with Codebuff" trailer or any co-author trailer to commit messages.
 
 ## Safety rules
