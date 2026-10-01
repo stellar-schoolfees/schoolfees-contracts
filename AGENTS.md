@@ -15,6 +15,38 @@ fees, made of three repos: `schoolfees-contracts` (this one), `schoolfees-app`, 
 - **No deployment until a real school or tutorial centre has agreed to try the flow.** The
   pilot gate lives in `ROADMAP.md`.
 
+## Source of truth
+
+Read these before changing anything, in this order:
+
+1. `README.md` — what works today, and the honest limitations.
+2. `docs/ARCHITECTURE.md` — the module map, and the pointer to the single architecture page.
+3. `docs/design/interface-v0.md` — the approved interface and its recorded defaults.
+4. `docs/SECURITY.md` — what security depends on, and what is out of scope.
+5. `docs/TESTING.md` — the real test layers, and what is **not** tested.
+6. `docs/DEPLOYMENT_CHECKLIST.md` — the release gate, and who holds which key.
+7. `ERRORS.md` — one row per error variant; the wording column is every other repo's source
+   of truth.
+8. `ROADMAP.md` — what is next, and what is deliberately not built.
+9. `docs/decisions/` — decisions already made, with their reasoning.
+
+The system is described once, in the docs repo: `schoolfees-docs/src/architecture.md`
+(architecture) and `schoolfees-docs/src/threat-model.md` (threats). Link to them; never copy
+or restate them here.
+
+## Collaboration rules
+
+- **Lead with the result or the next action.** Say what happened or what you need first;
+  detail comes after.
+- **Call out incorrect assumptions plainly.** If a premise in the task is wrong, say so in one
+  sentence and continue with what is true.
+- **Ask before anything destructive, legal, security-related, payment-related or
+  irreversible.** Do not guess on a high-stakes decision: record it as a question for the
+  human and carry on with the rest.
+- **Honest completion report.** Before saying done, state what you tested, what you did **not**
+  test, and any defect you found. "It works" without evidence is a liability, not a signal.
+- Do not invent requirements, and do not add scope beyond the task.
+
 ## Toolchain
 
 Verified on this machine on 2026-09-30. Re-check against developers.stellar.org — do not trust
@@ -124,7 +156,14 @@ stated reason requires dual-targeting — ask first), or `stellar contract test`
 - One logical change per commit. Never bundle unrelated changes.
 - Never create empty or filler commits.
 - Every commit must pass this repository's checks (the commands listed under Toolchain above).
-- Subject line: 100 characters or fewer, in the imperative mood.
+- Conventional format: `type: imperative summary`, where `type` is one of `feat`, `fix`,
+  `docs`, `chore`, `test`, `refactor`, `style` or `perf`.
+- Subject line: 72 characters or fewer, in the imperative mood. No trailing period.
+- Stage files by explicit name. **Never** `git add -A` or `git add .`.
+- Run `git status` and read the staged diff (`git diff --staged`) before every commit. Do not
+  commit a file you did not intend to change.
+- Never commit `.env` contents, key material, a secret, or a secret-looking string. If you see
+  one in a diff, stop and say so.
 - Do not rewrite history.
 - Never add a "Generated with Codebuff" trailer or any co-author trailer to commit messages.
 

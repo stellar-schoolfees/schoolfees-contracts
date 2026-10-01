@@ -50,11 +50,37 @@ together. When you add a variant:
   trivial tests.
 - No `unwrap()`/`expect()` outside tests.
 - No personal data on-chain, in tests, or in fixtures. Use synthetic references.
-- Small commits with clear messages. Do not rewrite history.
 - Do not add a dependency without saying why in the pull request, and check that
   the crate is maintained first.
 - Never commit `.env` files, secret keys or seed phrases. If you see one in a
   diff, say so instead of merging.
+
+## Git discipline
+
+Before every commit:
+
+```bash
+git status --porcelain         # know exactly which files changed
+git diff --staged             # read what you are about to commit
+```
+
+- **Stage files by name** — `git add src/fee.rs ERRORS.md`, never `git add -A`.
+  Broad staging is how unrelated changes and secrets get into history.
+- **Read the staged diff line by line.** If a hunk is not yours, leave it out.
+- **Secret scan.** No API keys, tokens, passwords, connection strings, `.env`
+  contents or key material — not in the diff, not in a test fixture. If you see
+  one, say so instead of committing it.
+- **No debug or generated output** in the commit: no `console.log`, no
+  `dbg!`/`println!` left behind, no `target/`, no `test_snapshots/`.
+- **Conventional commit message:** `type: imperative summary`, 72 characters or
+  fewer, where `type` is `feat`, `fix`, `docs`, `chore`, `test`, `refactor`,
+  `style` or `perf`. Good: `fix: reject a refund above what the payer paid`.
+  Bad: `update stuff`, `final fixes`, `wip`.
+- **One logical change per commit.** Never bundle unrelated changes, and never
+  create empty or filler commits. Every commit must pass the checks above in
+  that commit's own state — not "will pass after the next one".
+- No `Generated with …` or co-author trailers. Do not rewrite history, change
+  remotes, or push on someone else's behalf.
 
 ## Issues
 
