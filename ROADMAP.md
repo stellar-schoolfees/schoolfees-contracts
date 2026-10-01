@@ -22,6 +22,20 @@ Approved design: [docs/design/interface-v0.md](docs/design/interface-v0.md).
 - [x] Tests for the happy path, installments, refunds, closing, timing boundaries, TTL and unauthorized callers.
 - [x] The dependency decision (no OpenZeppelin crates in v0) recorded in [docs/decisions/0001-openzeppelin-and-token-dependencies.md](docs/decisions/0001-openzeppelin-and-token-dependencies.md).
 
+## Done (engineering standards — 2026-10-01)
+
+The contract was measured against the Build Arsenal (crypto profile, risk: HIGH)
+and the Flowtick engineering playbook. The gap map is
+`schoolfees-docs/docs/arsenal-gap-map.md`; the audits are in
+`schoolfees-docs/docs/audits/`.
+
+- [x] `docs/SECURITY.md` — authorization per function, no custody, token trust, input validation, TTL and archival risk, dependency review, and what is explicitly out of scope. Links the docs repo's threat model rather than copying it.
+- [x] `docs/TESTING.md` — the real layers with exact counts and test names, the error-path rule, and what is **not** tested (aggregate invariants, real token edge cases, fuzzing, deployment).
+- [x] `docs/DEPLOYMENT_CHECKLIST.md` — the release gate, starting with the pilot agreement; key holders, token choice, the wasm hash record, the no-upgrade-path rollback plan, and a post-deploy smoke test. Local build observed 2026-10-01: 13,794 bytes optimized, hash `d842422d…`, 8 exported functions, built with CLI 27.1.0.
+- [x] `docs/ARCHITECTURE.md` — a module map and a pointer to the single architecture page, with no duplicated description.
+- [x] `AGENTS.md` — Source of truth list, Flowtick collaboration rules, and the conventional-commit/staging rule. `CONTRIBUTING.md` gained the Git discipline for outside contributors.
+- [x] No new contract issues were found that are not already tracked by drafts 06, 07 and 08.
+
 ## Done (companion repos)
 
 - [x] `schoolfees-docs`: architecture, limitations, threat model, pilot playbook, link checker and docs CI.
