@@ -5,11 +5,9 @@ obligation against an opaque reference, and a payer settles it on testnet with a
 transaction anyone can verify. No student names, phone numbers or IDs ever go
 on-chain — only opaque references or hashes.
 
-> **Status: v0 fee lifecycle implemented (testnet only, not deployed).**
-> The contract records fee obligations against opaque references, takes
-> installments, closes records, and refunds within recorded limits — see the
-> table below. Nothing here has been deployed, audited, or used by a real payer
-> yet.
+> **Status: v0 fee lifecycle implemented; synthetic testnet demonstration deployed.**
+> Deployment and initialization are verified in the [demonstration record](docs/TESTNET_DEMONSTRATION.md).
+> No real pilot, audit or browser-wallet business flow has been completed.
 
 Part of the schoolfees project, which is three repositories:
 `schoolfees-contracts` (this one), `schoolfees-app`, `schoolfees-docs`.

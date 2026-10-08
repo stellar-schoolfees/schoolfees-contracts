@@ -87,3 +87,11 @@ git diff --staged             # read what you are about to commit
 Issues are drafted in [docs/issue-drafts](docs/issue-drafts) using the template in
 `AGENTS.md`; the maintainer posts them. Please do not open an issue asking for
 mainnet support — this phase is testnet only by design.
+
+## Contributor templates
+
+The [bug report](.github/ISSUE_TEMPLATE/bug_report.yml),
+[feature request](.github/ISSUE_TEMPLATE/feature_request.yml), and
+[pull request template](.github/pull_request_template.md) describe the evidence
+and checks to include. These are templates only; preparing one does not publish
+an issue or authorize deployment. Keep public reports free of secrets and personal data.

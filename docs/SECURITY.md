@@ -11,7 +11,8 @@ for threats is
 (a STRIDE walk-through with "not applicable, because…" entries). This page is
 the requirements list that model is checked against.
 
-Status: **testnet only, never deployed, no audit.** Nothing on this page is a
+Status: **synthetic testnet demonstration deployed; no audit or real pilot.**
+See the [deployment record](TESTNET_DEMONSTRATION.md). Nothing on this page is a
 claim that the contract is safe to use with real money. See
 [`../README.md`](../README.md) and the docs repo's `limitations.md`.
 

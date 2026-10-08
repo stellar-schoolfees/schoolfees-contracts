@@ -4,9 +4,11 @@ The release gate for the contract. Adapted from the Build Arsenal
 `RELEASE_RUNBOOK` and `DEPLOYMENT_CHECKLIST_TEMPLATE` to a Soroban contract that
 has **no upgrade path**.
 
-**Testnet only.** No mainnet, ever, in this phase. Nothing on this page has been
-done: the contract has never been deployed anywhere. Every box is unticked on
-purpose, and the first one is the gate that everything else waits behind.
+**Testnet only.** No mainnet in this phase. The real-pilot checklist below remains
+incomplete. A separately authorized synthetic demonstration was deployed and
+initialized October 8, 2026; its verified results are in
+[TESTNET_DEMONSTRATION.md](TESTNET_DEMONSTRATION.md). That exception does not
+satisfy the pilot agreement or business-flow smoke-test requirements below.
 
 Run by the **maintainer**, never by an agent (`AGENTS.md`). The deploy script is
 `scripts/deploy-testnet.sh`; it reads the signing identity from
