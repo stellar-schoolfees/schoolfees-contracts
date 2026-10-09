@@ -1,3 +1,9 @@
+<!-- project-brand -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="brand/logo-dark.svg">
+  <img src="brand/logo.svg" alt="SchoolFees" height="72">
+</picture>
+
 # schoolfees — contracts
 
 Soroban (Stellar) contract for paying **school fees**: a school records a fee
